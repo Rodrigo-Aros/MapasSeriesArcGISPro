@@ -1,0 +1,210 @@
+---
+title: "Manual para la Creación de Cartografía en ArcGIS Pro a partir de Layouts"
+author: "Rodrigo Aros"
+toc: true
+number-sections: true
+highlight-style: pygments
+format:
+  html: 
+    css: styles.css
+    code-fold: true
+    html-math-method: katex
+  pdf:
+    geometry: 
+      - top=30mm
+      - left=30mm
+  docx: default
+email-obfuscation: javascript
+---
+
+**Contacto:** [rodrigo.aros\@idiem.cl](mailto:rodrigo.aros@idiem.cl){.email}
+
+## Introducción
+
+Este instructivo está dirigido a usuarios del proyecto Araucancía y necesitan crear diseños de mapas, mediante el uso de la interfaz de diseño o **Layout** de ArcGIS Pro. Aquí se explican los pasos, desde la carga del mapa, hasta la exportación final, incluyendo la creación de series de mapas (map series).
+
+## Layout en ArcGIS Pro
+
+### Abrir Proyecto
+
+Paso 1: Abre ArcGIS Pro
+
+Paso 2: Haz clic en "Open another project" o "New Project" si deseas comenzar desde cero.
+
+### Importar archivo .pagx
+
+Paso 3: Para cargar layout, debes descargar los formatos IDIEM (archivos con extensión .pagx) a partir de ArcGIS Online e importarlos en ArcGIS Pro. Para esto debe seguir el siguiente paso a paso:
+
+-   Descargar archivo <a href="https://idiem.maps.arcgis.com/home/item.html?id=f30aecbd66f9484a8d459028efb72c0e" target="_blank">Descarga Layout AGOL</a>
+-   Dirigase a pestaña 'Insert'
+-   Luego New Layout
+-   Import Layout File
+
+::: {style="text-align: center;"}
+<strong>Figura 1: Importar Layout en ArcGIS Pro</strong>
+:::
+
+![](importlayout.png){fig-align="center" width="80%" fig-cap="importar layout"}
+
+## Ajustes al Diseño
+
+Para realizar ajustes al diseño o layout. Ya sea para aplicar máscara, ajuste Cartografía Base, modificar simbología, ajuste de Transparencia del algúna capa, etc. Se debe conocer la composicion de cada elemento del diseño.(Mapa de ubicación, BarraEscala, Textos, Leyenda, Mapa Principal, etc.) y como entrar a su configuración. Para esto se describirán los elementos de la plantilla:
+
+::: {style="text-align: center;"}
+<strong>Figura 2: Elementos del Layout</strong>
+:::
+
+![](componentesLayout.png){fig-align="center" width="60%" fig-cap="Leyenda de la figura"}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+
+tabla <- data.frame(
+  Elemento = c("Mapa de Ubicación", "BarraEscala", "Text 1", "Leyenda","Subtítulo","Título","SistemaDeReferencia","Norte","LogoIdiem","MarcoLogo","DatosGeodesicos","DatosPrincipales","MapaPrincipal","Marco"),
+  Descripción = c(
+    "Muestra el mapa de referencial o de ubicación a nivel regional",
+    "Contiene elemento de la Barra de Escala",
+    "Contiene el texto en viñeta de la escala numérica",
+    "Elemento contiene el objeto Leyenda",
+    "Texto para subtítulo en viñeta ",
+    "Texto para título en viñeta",
+    "Texto para información de Sistema de Referencia utilizado",
+    "Contiene elemento para señalar Norte Verdadero",
+    "Contiene logo Idiem institucional",
+    "Elemento o marco para logo idiem",
+    "Elemento o marco para Datos Geodésicos",
+    "Elemento o marco para Datos Cartografia",
+    "Contiene Map Frame Principal",
+    "Marco general del mapa"),
+  Tipo = c("Map Frame",
+           "Scale Bar",
+           "Text",
+           "Legend",
+           "Text",
+           "Text",
+           "Text",
+           "North Arrow",
+           "Picture",
+           "Graphic",
+           "Graphic",
+           "Graphic",
+           "Map Frame",
+           "Graphic")
+  )
+
+
+kable(tabla, caption = "**Componentes principales de un Layout en ArcGIS Pro**")
+```
+
+### Configurar Mapa Principal
+
+Para modificar el mapa principal u otros elementos del diseño, primero es necesario revisar el ícono del "candado" asociado a cada uno de estos items. Esto permite bloquear o desbloquear el elemento para habilitar o restringir su edición. Además, es importante tener en cuenta que cada componente del layout puede estar activado o desactivado. Esta configuración determina si el elemento se muestra o oculta en el diseño final, según los requerimientos del mapa. Para configurar, se debe hacer clic en algun elemento. Para los Map Frame. Debo hacer click derecho y seleccionar **Open**, tal cual muestra la siguiente imagen:
+
+::: {style="text-align: center;"}
+<strong>Figura 3: Configurar Map Frame Principal</strong>
+:::
+
+![](open.png){fig-align="center" width="60%" fig-cap="Leyenda de la figura"}
+
+### Ajustes en Vista de Mapa
+
+Una vez abierta la vista de mapa, podrá realizar todos los ajustes necesarios y agregar capas que considere relevantes para su cartografía final. En esta etapa, podrá realizar todos los ajustes relacionados a querys, simbologías, etiquetados, nivel de transparencia, etc. Importante es que debe considerar, que todo ajuste realizado en la vista de mapa, automáticamente se verá reflejado en el diseño que tiene ya incorporado a su sesión de ArcGIS Pro (esto incluso para el mapeo en serie).
+
+::: {style="text-align: center;"}
+<strong>Figura 4: Ajustes vista de Mapa</strong>
+:::
+
+![](vistaMapa.png){fig-align="center" height="450px" fig-cap="Leyenda de la figura"}
+
+## Mapeo en Serie
+
+Una serie de mapas es una colección de páginas (también conocidas como hojas de mapas) creadas a partir de un diseño único , donde cada página muestra una extensión específica del mapa. Las páginas de una serie de mapas pueden tener elementos dinámicos que se actualizan en cada página, como la escala o el título del mapa, y elementos estáticos que se mantienen constantes en todas las páginas, como los gráficos. <a href="https://pro.arcgis.com/en/pro-app/3.3/help/layouts/map-series.htm" target="_blank">Map Series</a>. Recuerde revisar presentación [Mapeado en Serie – ArcGIS Pro](Mapeado%20en%20Serie%20–%20ArcGIS%20Pro.pdf){target="_blank"}. Para activar el mapeo en serie espacial, debe posicionarse en la vista de diseño, luego boton derecho en nombre de Layout y seleccionar **properties**.
+
+::: {style="text-align: center;"}
+<strong>Figura 5: Seriado de Mapas</strong>
+:::
+
+![](mapSeries.png){fig-align="center" height="450px" fig-cap="Map Series"}
+
+### Map Series Spatial
+
+Luego deberá habilitar map series y elegir la opción **"Spatial"**. A continuación deberá seleccionar una **capa índice**, para realizar el seriado a partir de un feature que ud deternine por ej: "Comunas", "PostasEcuelasAraucania3", entre otras. También en **Optional Fields**, podrá agrupar por algun campo en específico por ejemplo, utilizar campo "Provincia".
+
+::: {style="text-align: center;"}
+<strong>Figura 6: Map Series Spatial</strong>
+:::
+
+![](mpSpatial.png){fig-align="center" height="450px" fig-cap="Map SeriesSpatial"}
+
+### Configurar Escala por Comuna
+
+Para configurar la escala de visualización por comuna, se crea un campo llamado 'escala' en la capa **"ComunasAraucanía"**. En este campo se define la escala específica que debe aplicarse a cada una de las comunas. Esto permite que la serie de mapas se genere con una escala personalizada, adaptándose al tamaño y extensión territorial de cada comuna.[^1].
+
+[^1]: Nótese que la opción **Clip to index feature** realiza un recorte del limite comunal, dejando todo lo demas en blanco.
+
+::: {style="text-align: center;"}
+<strong>Figura 7: Ajuste Escala Map Series</strong>
+:::
+
+![](mpEscala.png){fig-align="center" height="450px" fig-cap="Map SeriesSpatial"}
+
+### Map Series Thematic
+
+Una serie de mapas temáticos es un diseño que comprende un conjunto de páginas de salida generadas mediante la iteración a través de cada subcapa en una <a href="https://pro.arcgis.com/en/pro-app/3.3/help/mapping/layer-properties/work-with-group-layers.htm#ESRI_SECTION1_6CCE88EDC524477C9BC4CACDB653C737" target="_blank">Capa de Grupo de Radio</a>. La extensión del mapa en cada página es la misma, pero la subcapa visible de la capa de grupo difiere. Se crea una página para cada subcapa con solo esa subcapa visible y todas las demás están desactivadas. Las capas que no están en la capa del grupo de radio son visibles en todas las páginas. Lamentablemente tiene algunas limitantes, pero es un flujo de trabajo alternativo según el dominio de la interfaz de diseño de ArcGIS Pro. Algunas características de este seriado es que: el mapa no cambia de posición, escala se mantiene fija, etc. Por tanto está pensando para trabajar una región completa y desde alli, usar distintos atributos de una capa determinada, para representar por ejemplo cantidad de población comunal para la región de la Araucanía, indice de natalidad por comuna, concentración de rangos etarios por comuna, entre otras. Es decir, podría tener todas estas temáticas para la región incorporado en el seriado.
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+tabla2 <- data.frame(
+  Característica = c(
+    "Propósito principal",
+    "Encuadre automático del mapa",
+    "Requiere capa poligonal",
+    "Control de visibilidad",
+    "Escala personalizada por página",
+    "Configuración inicial",
+    "Uso típico",
+    "Requiere nombre de capa igual al campo"
+  ),
+  Spatial = c(
+    "Crear mapas por entidades geográficas (e.g., comunas)",
+    "Sí (centrado y escala por entidad)",
+    "Sí (índice espacial)",
+    "Opcional, pero no automático por entidad",
+    "Sí (campo de escala)",
+    "Más automática (con capa de índice)",
+    "Series por zonas: comunas, predios, sectores",
+    "No"
+  ),
+  Thematic = c(
+    "Cambiar visibilidad de capas/grupos según un campo temático",
+    "No (el mapa no cambia de posición ni escala)",
+    "No necesariamente",
+    "Sí, cambia qué capas/grupos se muestran por página",
+    "No (se mantiene fija en todas las páginas)",
+    "Requiere más preparación en nombres de capas y campos temáticos",
+    "Series con layout fijo: mostrar distintas variables, radios, etc.",
+    "Sí, para coincidir visibilidad (match layer names)"
+  )
+)
+
+knitr::kable(tabla2, caption = "Comparación entre Spatial y Thematic Map Series en ArcGIS Pro")
+
+```
+
+## Exportación de los Mapas Seriados
+Para exportar los mapas estando en la vista de diseño, se debe seleccionar la pestaña **Share**, luego elegir la opción **Export Layout** y seleccionar el formato que se necesita. 
+
+::: {style="text-align: center;"}
+<strong>Figura 8: Exportar Mapas</strong>
+:::
+![](Esquema.png){fig-align="center" height="450px" fig-cap="Map SeriesSpatial"}
+
+Finalmente en opción **File Type**[^2] puede seleccionar tipo de archivo de descarega, ajustar la ruta de salida de la exportación, ajustar calidad de la salida, DPI y entrar a la opción de **Map Series**, donde se podrá exportar todas las páginas, la página actual, sleccionar página específica o un rango determinado; esto de acuerdo a la siguiente imagen: 
+
+[^2]: Los formatos soportados son AIX, BMP, EMF, EPS, GID, JPEG, PDF, PNG, SVG, SVGZ, TGA y TIFF
+
+::: {style="text-align: center;"}
+<strong>Figura 9: Propiedades del exportado en Serie</strong>
+:::
+
+![](export.png){fig-align="center" height="450px" fig-cap="Map SeriesExport"}

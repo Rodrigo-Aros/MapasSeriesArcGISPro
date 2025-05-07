@@ -1,0 +1,90 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"Instructivo 1: Construcción de Mapas en ArcGIS Pro\"\n",
+        "author: \"Rodrigo Aros\"\n",
+        "format: html\n",
+        "email-obfuscation: javascript\n",
+        "---\n",
+        "\n",
+        "**Contacto:** <rodrigo.aros@idiem.cl>\n",
+        "\n",
+        "## Introducción\n",
+        "\n",
+        "Este instructivo está dirigido a usuarios que se inician en el uso de **ArcGIS Pro** y necesitan crear diseños de mapas profesionales mediante el uso de la herramienta **Layout**. Aquí se explican los pasos desde la carga del mapa hasta la exportación final, incluyendo la creación de series de mapas (map series).\n",
+        "\n",
+        "## Diseño de Mapa a traves de ArcGIS Pro\n",
+        "\n",
+        "### 0. Abrir Proyecto \n",
+        "Paso 1: Abre ArcGIS Pro\n",
+        "\n",
+        "Paso 2: Haz clic en \"Open another project\" o \"New Project\" si deseas comenzar desde cero.\n",
+        "\n",
+        "### 1. Importar Layout\n",
+        "\n",
+        "Para cargar layout, debe descargar los formatos IDIEM (archivos con extensión .pagx) y cargarlos en ArcGIS Pro. Para esto debe seguir el siguiente paso a paso:\n",
+        "\n",
+        "- Dirigase a pestaña 'Insert'\n",
+        "- Luego New Layout\n",
+        "- Import Layout File\n",
+        "\n",
+        "\n",
+        "![](importlayout.png){fig-align=\"center\" width=\"80%\" fig-cap=\"Leyenda de la figura\"}\n",
+        "\n",
+        "### 2. Ajustes al Diseño\n",
+        "\n",
+        "Para realizar ajustes al diseño o layout. Se debe conocer la composicion de cada elemento, del diseño.(Mapa de ubicación, BarraEscala, Textos, Leyenda, Mapa Principal, etc.) Para esto se describen los elementos del diseño:\n",
+        "\n",
+        "![](componentesLayout.png){fig-align=\"center\" width=\"60%\" fig-cap=\"Leyenda de la figura\"}"
+      ],
+      "id": "7c0ce55d"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| label: tbl-planet-measures\n",
+        "#| tbl-cap: Astronomical object\n",
+        "\n",
+        "from IPython.display import Markdown\n",
+        "from tabulate import tabulate\n",
+        "table = [[\"Sun\",\"696,000\",1.989e30],\n",
+        "         [\"Earth\",\"6,371\",5.972e24],\n",
+        "         [\"Moon\",\"1,737\",7.34e22],\n",
+        "         [\"Mars\",\"3,390\",6.39e23]]\n",
+        "Markdown(tabulate(\n",
+        "  table, \n",
+        "  headers=[\"Astronomical object\",\"R (km)\", \"mass (kg)\"]\n",
+        "))"
+      ],
+      "id": "tbl-planet-measures",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "\n",
+        "**Contacto:** rodrigo.aros@idiem.cl  \n",
+        "**Manual elaborado por:** Rodrigo Aros  \n",
+        "**Institución:** IDIEM  \n"
+      ],
+      "id": "1dec6730"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "display_name": "Python 3",
+      "language": "python",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

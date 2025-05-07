@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Rodrigo Aros">
+
+<title>Manual para la Creación de Cartografía en ArcGIS Pro a partir de Layouts</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Instructivo1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Instructivo1_files/libs/quarto-html/quarto.js"></script>
+<script src="Instructivo1_files/libs/quarto-html/popper.min.js"></script>
+<script src="Instructivo1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Instructivo1_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Instructivo1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Instructivo1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Instructivo1_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Instructivo1_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Instructivo1_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción"><span class="header-section-number">1</span> Introducción</a></li>
+  <li><a href="#layout-en-arcgis-pro" id="toc-layout-en-arcgis-pro" class="nav-link" data-scroll-target="#layout-en-arcgis-pro"><span class="header-section-number">2</span> Layout en ArcGIS Pro</a>
+  <ul class="collapse">
+  <li><a href="#abrir-proyecto" id="toc-abrir-proyecto" class="nav-link" data-scroll-target="#abrir-proyecto"><span class="header-section-number">2.1</span> Abrir Proyecto</a></li>
+  <li><a href="#importar-archivo-.pagx" id="toc-importar-archivo-.pagx" class="nav-link" data-scroll-target="#importar-archivo-.pagx"><span class="header-section-number">2.2</span> Importar archivo .pagx</a></li>
+  </ul></li>
+  <li><a href="#ajustes-al-diseño" id="toc-ajustes-al-diseño" class="nav-link" data-scroll-target="#ajustes-al-diseño"><span class="header-section-number">3</span> Ajustes al Diseño</a>
+  <ul class="collapse">
+  <li><a href="#configurar-mapa-principal" id="toc-configurar-mapa-principal" class="nav-link" data-scroll-target="#configurar-mapa-principal"><span class="header-section-number">3.1</span> Configurar Mapa Principal</a></li>
+  <li><a href="#ajustes-en-vista-de-mapa" id="toc-ajustes-en-vista-de-mapa" class="nav-link" data-scroll-target="#ajustes-en-vista-de-mapa"><span class="header-section-number">3.2</span> Ajustes en Vista de Mapa</a></li>
+  </ul></li>
+  <li><a href="#mapeo-en-serie" id="toc-mapeo-en-serie" class="nav-link" data-scroll-target="#mapeo-en-serie"><span class="header-section-number">4</span> Mapeo en Serie</a>
+  <ul class="collapse">
+  <li><a href="#map-series-spatial" id="toc-map-series-spatial" class="nav-link" data-scroll-target="#map-series-spatial"><span class="header-section-number">4.1</span> Map Series Spatial</a></li>
+  <li><a href="#configurar-escala-por-comuna" id="toc-configurar-escala-por-comuna" class="nav-link" data-scroll-target="#configurar-escala-por-comuna"><span class="header-section-number">4.2</span> Configurar Escala por Comuna</a></li>
+  <li><a href="#map-series-thematic" id="toc-map-series-thematic" class="nav-link" data-scroll-target="#map-series-thematic"><span class="header-section-number">4.3</span> Map Series Thematic</a></li>
+  </ul></li>
+  <li><a href="#exportación-de-los-mapas-seriados" id="toc-exportación-de-los-mapas-seriados" class="nav-link" data-scroll-target="#exportación-de-los-mapas-seriados"><span class="header-section-number">5</span> Exportación de los Mapas Seriados</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Instructivo1.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li><li><a href="Instructivo1.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Manual para la Creación de Cartografía en ArcGIS Pro a partir de Layouts</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Rodrigo Aros </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Contacto:</strong> <script type="text/javascript">
+<!--
+h='&#x69;&#100;&#x69;&#x65;&#x6d;&#46;&#x63;&#108;';a='&#64;';n='&#114;&#x6f;&#100;&#114;&#x69;&#x67;&#x6f;&#46;&#x61;&#114;&#x6f;&#x73;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail email">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>rodrigo.aros at idiem dot cl</noscript></p>
+<section id="introducción" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="introducción"><span class="header-section-number">1</span> Introducción</h2>
+<p>Este instructivo está dirigido a usuarios del proyecto Araucancía y necesitan crear diseños de mapas, mediante el uso de la interfaz de diseño o <strong>Layout</strong> de ArcGIS Pro. Aquí se explican los pasos, desde la carga del mapa, hasta la exportación final, incluyendo la creación de series de mapas (map series).</p>
+</section>
+<section id="layout-en-arcgis-pro" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="layout-en-arcgis-pro"><span class="header-section-number">2</span> Layout en ArcGIS Pro</h2>
+<section id="abrir-proyecto" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="abrir-proyecto"><span class="header-section-number">2.1</span> Abrir Proyecto</h3>
+<p>Paso 1: Abre ArcGIS Pro</p>
+<p>Paso 2: Haz clic en “Open another project” o “New Project” si deseas comenzar desde cero.</p>
+</section>
+<section id="importar-archivo-.pagx" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="importar-archivo-.pagx"><span class="header-section-number">2.2</span> Importar archivo .pagx</h3>
+<p>Paso 3: Para cargar layout, debes descargar los formatos IDIEM (archivos con extensión .pagx) a partir de ArcGIS Online e importarlos en ArcGIS Pro. Para esto debe seguir el siguiente paso a paso:</p>
+<ul>
+<li>Descargar archivo <a href="https://idiem.maps.arcgis.com/home/item.html?id=f30aecbd66f9484a8d459028efb72c0e" target="_blank">Descarga Layout AGOL</a></li>
+<li>Dirigase a pestaña ‘Insert’</li>
+<li>Luego New Layout</li>
+<li>Import Layout File</li>
+</ul>
+<div style="text-align: center;">
+<p><strong>Figura 1: Importar Layout en ArcGIS Pro</strong></p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="importlayout.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:80.0%" data-fig-cap="importar layout"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="ajustes-al-diseño" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="ajustes-al-diseño"><span class="header-section-number">3</span> Ajustes al Diseño</h2>
+<p>Para realizar ajustes al diseño o layout. Ya sea para aplicar máscara, ajuste Cartografía Base, modificar simbología, ajuste de Transparencia del algúna capa, etc. Se debe conocer la composicion de cada elemento del diseño.(Mapa de ubicación, BarraEscala, Textos, Leyenda, Mapa Principal, etc.) y como entrar a su configuración. Para esto se describirán los elementos de la plantilla:</p>
+<div style="text-align: center;">
+<p><strong>Figura 2: Elementos del Layout</strong></p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="componentesLayout.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%" data-fig-cap="Leyenda de la figura"></p>
+</figure>
+</div>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption><strong>Componentes principales de un Layout en ArcGIS Pro</strong></caption>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 66%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Elemento</th>
+<th style="text-align: left;">Descripción</th>
+<th style="text-align: left;">Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Mapa de Ubicación</td>
+<td style="text-align: left;">Muestra el mapa de referencial o de ubicación a nivel regional</td>
+<td style="text-align: left;">Map Frame</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">BarraEscala</td>
+<td style="text-align: left;">Contiene elemento de la Barra de Escala</td>
+<td style="text-align: left;">Scale Bar</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Text 1</td>
+<td style="text-align: left;">Contiene el texto en viñeta de la escala numérica</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Leyenda</td>
+<td style="text-align: left;">Elemento contiene el objeto Leyenda</td>
+<td style="text-align: left;">Legend</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Subtítulo</td>
+<td style="text-align: left;">Texto para subtítulo en viñeta</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Título</td>
+<td style="text-align: left;">Texto para título en viñeta</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">SistemaDeReferencia</td>
+<td style="text-align: left;">Texto para información de Sistema de Referencia utilizado</td>
+<td style="text-align: left;">Text</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Norte</td>
+<td style="text-align: left;">Contiene elemento para señalar Norte Verdadero</td>
+<td style="text-align: left;">North Arrow</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">LogoIdiem</td>
+<td style="text-align: left;">Contiene logo Idiem institucional</td>
+<td style="text-align: left;">Picture</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MarcoLogo</td>
+<td style="text-align: left;">Elemento o marco para logo idiem</td>
+<td style="text-align: left;">Graphic</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">DatosGeodesicos</td>
+<td style="text-align: left;">Elemento o marco para Datos Geodésicos</td>
+<td style="text-align: left;">Graphic</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">DatosPrincipales</td>
+<td style="text-align: left;">Elemento o marco para Datos Cartografia</td>
+<td style="text-align: left;">Graphic</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MapaPrincipal</td>
+<td style="text-align: left;">Contiene Map Frame Principal</td>
+<td style="text-align: left;">Map Frame</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Marco</td>
+<td style="text-align: left;">Marco general del mapa</td>
+<td style="text-align: left;">Graphic</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<section id="configurar-mapa-principal" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="configurar-mapa-principal"><span class="header-section-number">3.1</span> Configurar Mapa Principal</h3>
+<p>Para modificar el mapa principal u otros elementos del diseño, primero es necesario revisar el ícono del “candado” asociado a cada uno de estos items. Esto permite bloquear o desbloquear el elemento para habilitar o restringir su edición. Además, es importante tener en cuenta que cada componente del layout puede estar activado o desactivado. Esta configuración determina si el elemento se muestra o oculta en el diseño final, según los requerimientos del mapa. Para configurar, se debe hacer clic en algun elemento. Para los Map Frame. Debo hacer click derecho y seleccionar <strong>Open</strong>, tal cual muestra la siguiente imagen:</p>
+<div style="text-align: center;">
+<p><strong>Figura 3: Configurar Map Frame Principal</strong></p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="open.png" class="img-fluid quarto-figure quarto-figure-center figure-img" style="width:60.0%" data-fig-cap="Leyenda de la figura"></p>
+</figure>
+</div>
+</section>
+<section id="ajustes-en-vista-de-mapa" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="ajustes-en-vista-de-mapa"><span class="header-section-number">3.2</span> Ajustes en Vista de Mapa</h3>
+<p>Una vez abierta la vista de mapa, podrá realizar todos los ajustes necesarios y agregar capas que considere relevantes para su cartografía final. En esta etapa, podrá realizar todos los ajustes relacionados a querys, simbologías, etiquetados, nivel de transparencia, etc. Importante es que debe considerar, que todo ajuste realizado en la vista de mapa, automáticamente se verá reflejado en el diseño que tiene ya incorporado a su sesión de ArcGIS Pro (esto incluso para el mapeo en serie).</p>
+<div style="text-align: center;">
+<p><strong>Figura 4: Ajustes vista de Mapa</strong></p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="vistaMapa.png" class="quarto-figure quarto-figure-center figure-img" data-fig-cap="Leyenda de la figura" height="450"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="mapeo-en-serie" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="mapeo-en-serie"><span class="header-section-number">4</span> Mapeo en Serie</h2>
+<p>Una serie de mapas es una colección de páginas (también conocidas como hojas de mapas) creadas a partir de un diseño único , donde cada página muestra una extensión específica del mapa. Las páginas de una serie de mapas pueden tener elementos dinámicos que se actualizan en cada página, como la escala o el título del mapa, y elementos estáticos que se mantienen constantes en todas las páginas, como los gráficos. <a href="https://pro.arcgis.com/en/pro-app/3.3/help/layouts/map-series.htm" target="_blank">Map Series</a>. Recuerde revisar presentación <a href="Mapeado%20en%20Serie%20–%20ArcGIS%20Pro.pdf" target="_blank">Mapeado en Serie – ArcGIS Pro</a>. Para activar el mapeo en serie espacial, debe posicionarse en la vista de diseño, luego boton derecho en nombre de Layout y seleccionar <strong>properties</strong>.</p>
+<div style="text-align: center;">
+<p><strong>Figura 5: Seriado de Mapas</strong></p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="mapSeries.png" class="quarto-figure quarto-figure-center figure-img" data-fig-cap="Map Series" height="450"></p>
+</figure>
+</div>
+<section id="map-series-spatial" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="map-series-spatial"><span class="header-section-number">4.1</span> Map Series Spatial</h3>
+<p>Luego deberá habilitar map series y elegir la opción <strong>“Spatial”</strong>. A continuación deberá seleccionar una <strong>capa índice</strong>, para realizar el seriado a partir de un feature que ud deternine por ej: “Comunas”, “PostasEcuelasAraucania3”, entre otras. También en <strong>Optional Fields</strong>, podrá agrupar por algun campo en específico por ejemplo, utilizar campo “Provincia”.</p>
+<div style="text-align: center;">
+<p><strong>Figura 6: Map Series Spatial</strong></p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="mpSpatial.png" class="quarto-figure quarto-figure-center figure-img" data-fig-cap="Map SeriesSpatial" height="450"></p>
+</figure>
+</div>
+</section>
+<section id="configurar-escala-por-comuna" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="configurar-escala-por-comuna"><span class="header-section-number">4.2</span> Configurar Escala por Comuna</h3>
+<p>Para configurar la escala de visualización por comuna, se crea un campo llamado ‘escala’ en la capa <strong>“ComunasAraucanía”</strong>. En este campo se define la escala específica que debe aplicarse a cada una de las comunas. Esto permite que la serie de mapas se genere con una escala personalizada, adaptándose al tamaño y extensión territorial de cada comuna.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<div style="text-align: center;">
+<p><strong>Figura 7: Ajuste Escala Map Series</strong></p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="mpEscala.png" class="quarto-figure quarto-figure-center figure-img" data-fig-cap="Map SeriesSpatial" height="450"></p>
+</figure>
+</div>
+</section>
+<section id="map-series-thematic" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="map-series-thematic"><span class="header-section-number">4.3</span> Map Series Thematic</h3>
+<p>Una serie de mapas temáticos es un diseño que comprende un conjunto de páginas de salida generadas mediante la iteración a través de cada subcapa en una <a href="https://pro.arcgis.com/en/pro-app/3.3/help/mapping/layer-properties/work-with-group-layers.htm#ESRI_SECTION1_6CCE88EDC524477C9BC4CACDB653C737" target="_blank">Capa de Grupo de Radio</a>. La extensión del mapa en cada página es la misma, pero la subcapa visible de la capa de grupo difiere. Se crea una página para cada subcapa con solo esa subcapa visible y todas las demás están desactivadas. Las capas que no están en la capa del grupo de radio son visibles en todas las páginas. Lamentablemente tiene algunas limitantes, pero es un flujo de trabajo alternativo según el dominio de la interfaz de diseño de ArcGIS Pro. Algunas características de este seriado es que: el mapa no cambia de posición, escala se mantiene fija, etc. Por tanto está pensando para trabajar una región completa y desde alli, usar distintos atributos de una capa determinada, para representar por ejemplo cantidad de población comunal para la región de la Araucanía, indice de natalidad por comuna, concentración de rangos etarios por comuna, entre otras. Es decir, podría tener todas estas temáticas para la región incorporado en el seriado.</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Comparación entre Spatial y Thematic Map Series en ArcGIS Pro</caption>
+<colgroup>
+<col style="width: 24%">
+<col style="width: 33%">
+<col style="width: 41%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Característica</th>
+<th style="text-align: left;">Spatial</th>
+<th style="text-align: left;">Thematic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Propósito principal</td>
+<td style="text-align: left;">Crear mapas por entidades geográficas (e.g., comunas)</td>
+<td style="text-align: left;">Cambiar visibilidad de capas/grupos según un campo temático</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Encuadre automático del mapa</td>
+<td style="text-align: left;">Sí (centrado y escala por entidad)</td>
+<td style="text-align: left;">No (el mapa no cambia de posición ni escala)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Requiere capa poligonal</td>
+<td style="text-align: left;">Sí (índice espacial)</td>
+<td style="text-align: left;">No necesariamente</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Control de visibilidad</td>
+<td style="text-align: left;">Opcional, pero no automático por entidad</td>
+<td style="text-align: left;">Sí, cambia qué capas/grupos se muestran por página</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Escala personalizada por página</td>
+<td style="text-align: left;">Sí (campo de escala)</td>
+<td style="text-align: left;">No (se mantiene fija en todas las páginas)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Configuración inicial</td>
+<td style="text-align: left;">Más automática (con capa de índice)</td>
+<td style="text-align: left;">Requiere más preparación en nombres de capas y campos temáticos</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Uso típico</td>
+<td style="text-align: left;">Series por zonas: comunas, predios, sectores</td>
+<td style="text-align: left;">Series con layout fijo: mostrar distintas variables, radios, etc.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Requiere nombre de capa igual al campo</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Sí, para coincidir visibilidad (match layer names)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="exportación-de-los-mapas-seriados" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="exportación-de-los-mapas-seriados"><span class="header-section-number">5</span> Exportación de los Mapas Seriados</h2>
+<p>Para exportar los mapas estando en la vista de diseño, se debe seleccionar la pestaña <strong>Share</strong>, luego elegir la opción <strong>Export Layout</strong> y seleccionar el formato que se necesita.</p>
+<div style="text-align: center;">
+<p><strong>Figura 8: Exportar Mapas</strong></p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Esquema.png" class="quarto-figure quarto-figure-center figure-img" data-fig-cap="Map SeriesSpatial" height="450"></p>
+</figure>
+</div>
+<p>Finalmente en opción <strong>File Type</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> puede seleccionar tipo de archivo de descarega, ajustar la ruta de salida de la exportación, ajustar calidad de la salida, DPI y entrar a la opción de <strong>Map Series</strong>, donde se podrá exportar todas las páginas, la página actual, sleccionar página específica o un rango determinado; esto de acuerdo a la siguiente imagen:</p>
+<div style="text-align: center;">
+<p><strong>Figura 9: Propiedades del exportado en Serie</strong></p>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="export.png" class="quarto-figure quarto-figure-center figure-img" data-fig-cap="Map SeriesExport" height="450"></p>
+</figure>
+</div>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Nótese que la opción <strong>Clip to index feature</strong> realiza un recorte del limite comunal, dejando todo lo demas en blanco.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Los formatos soportados son AIX, BMP, EMF, EPS, GID, JPEG, PDF, PNG, SVG, SVGZ, TGA y TIFF<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
